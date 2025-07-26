@@ -1,0 +1,36 @@
+/* Estilos para h1 */
+h1 {
+    font-family: 'Georgia', serif; /* Tipografía elegante */
+    font-size: 3rem; /* Tamaño grande */
+    color: #2a9d8f; /* Color verde azulado */
+    text-align: center; /* Centrado */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+/* Estilos para h2 */
+h2 {
+    font-family: Arial, sans-serif; /* Tipografía moderna */
+    font-size: 2rem; /* Tamaño mediano */
+    color: #264653; /* Color azul oscuro */
+    background-color: #e9c46a; /* Fondo amarillo */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    margin: 0 auto; /* Centrado en contenedor */
+    width: 50%; /* Ocupa el 50% del ancho */
+    border: 2px solid #f4a261; /* Borde naranja */
+    text-align: justify; /* Texto justificado */
+    text-align-last: center; /* Última línea centrada */
+}
+
+
+/* Estilos generales del cuerpo */
+body {
+    background-color: #f1faee; /* Fondo claro */
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
