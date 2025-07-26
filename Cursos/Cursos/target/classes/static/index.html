@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos de Programación</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Asegúrate de tener tu CSS -->
+</head>
+<body>
+    <h1 style="text-align: center;">Cursos de Programación</h1>
+    <div class="filters" style="text-align: center;">
+        <button onclick="filtrarCursos('Java')">Java</button>
+        <button onclick="filtrarCursos('SQL')">SQL</button>
+        <button onclick="filtrarCursos('Python')">Python</button>
+        <button onclick="filtrarCursos('JavaScript')">JavaScript</button>
+        <button onclick="borrarFiltros()">Borrar filtros</button>
+    </div>
+    <table id="tabla-cursos" style="margin: 20px auto; width: 80%;">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción del Curso</th>
+                <th>Duración</th>
+                <th>Lenguaje</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody id="cursos-list">
+            <!-- Los cursos se cargarán aquí mediante JavaScript -->
+        </tbody>
+    </table>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
