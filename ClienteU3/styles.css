@@ -1,0 +1,104 @@
+
+body {
+    font-family: "Roboto", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    line-height: 1.6;
+}
+
+header {
+    background: #1565c0;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    padding: 2rem;
+}
+
+section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #bbdefb;
+    border-radius: 5px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #0d47a1;
+}
+
+label {
+    font-weight: bold;
+    color: #0d47a1;
+}
+
+input[type="text"] {
+    padding: 0.5rem;
+    margin-right: 1rem;
+    border: 1px solid #90caf9;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table tr:nth-child(odd) {
+    background-color: #f1f8ff;
+}
+
+table tr:nth-child(even) {
+    background-color: #e3f2fd;
+}
+
+table th, table td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #90caf9;
+}
+
+table th {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+
+button {
+    background: #1565c0;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: #0d47a1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#cart-items p {
+    background: #bbdefb;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+}
+
+footer {
+    background: #1565c0;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}

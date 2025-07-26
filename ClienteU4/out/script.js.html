@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: script.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: script.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file script.js
+ * @description Lógica para la gestión de productos utilizando arrays, localStorage, y operaciones avanzadas.
+ */
+
+/**
+ * Array que almacena los productos.
+ * Cada producto es un objeto con propiedades: nombre, precio y cantidad.
+ * @type {Array&lt;Object>}
+ */
+let products = loadProductsFromLocalStorage() || [
+    { nombre: 'Manzanas', precio: 1.50, cantidad: 10 },
+    { nombre: 'Bananas', precio: 0.80, cantidad: 20 },
+    { nombre: 'Naranjas', precio: 1.20, cantidad: 15 }
+  ];
+  
+  /**
+   * Guarda la matriz de productos en localStorage.
+   */
+  function saveProductsToLocalStorage() {
+    localStorage.setItem('products', JSON.stringify(products));
+  }
+  
+  /**
+   * Carga la matriz de productos desde localStorage.
+   * @returns {Array&lt;Object>|null} Array de productos o null si no existe.
+   */
+  function loadProductsFromLocalStorage() {
+    const data = localStorage.getItem('products');
+    return data ? JSON.parse(data) : null;
+  }
+  
+  /**
+   * Actualiza la tabla de productos en la interfaz.
+   * Además, calcula el total general utilizando .reduce().
+   */
+  function renderProducts() {
+    const tbody = document.querySelector('#productsTable tbody');
+    tbody.innerHTML = '';
+  
+    // Crear las filas de cada producto
+    products.forEach((product, index) => {
+      const tr = document.createElement('tr');
+  
+      // Precio total para el producto: precio * cantidad
+      const precioTotal = product.precio * product.cantidad;
+  
+      tr.innerHTML = `
+        &lt;td>${product.nombre}&lt;/td>
+        &lt;td>${product.precio.toFixed(2)}&lt;/td>
+        &lt;td>${product.cantidad}&lt;/td>
+        &lt;td>${precioTotal.toFixed(2)}&lt;/td>
+        &lt;td>
+          &lt;button onclick="handleEditProduct(${index})">Editar&lt;/button>
+          &lt;button onclick="deleteProduct(${index})">Eliminar&lt;/button>
+        &lt;/td>
+      `;
+      tbody.appendChild(tr);
+    });
+  
+    // Calcular el total general de todos los productos utilizando .reduce()
+    const generalTotal = products.reduce((total, product) => {
+      return total + (product.precio * product.cantidad);
+    }, 0);
+    document.getElementById('generalTotal').textContent = generalTotal.toFixed(2);
+  }
+  
+  /**
+   * Maneja la adición de un nuevo producto.
+   * Recoge los valores del formulario, agrega el nuevo producto al array, guarda en localStorage y actualiza la tabla.
+   * @param {Event} event Evento de envío del formulario.
+   */
+  function handleAddProduct(event) {
+    event.preventDefault(); // Evitar recargar la página
+  
+    const nameInput = document.getElementById('productName');
+    const priceInput = document.getElementById('productPrice');
+    const quantityInput = document.getElementById('productQuantity');
+  
+    const newProduct = {
+      nombre: nameInput.value.trim(),
+      precio: parseFloat(priceInput.value),
+      cantidad: parseInt(quantityInput.value)
+    };
+  
+    addProduct(newProduct);
+    event.target.reset();
+    renderProducts();
+  }
+  
+  /**
+   * Agrega un nuevo producto al array de productos.
+   * @param {Object} product Objeto producto con propiedades: nombre, precio, cantidad.
+   */
+  function addProduct(product) {
+    products.push(product);
+    saveProductsToLocalStorage();
+  }
+  
+  /**
+   * Elimina un producto del array dado su índice.
+   * @param {number} index Índice del producto a eliminar.
+   */
+  function deleteProduct(index) {
+    if (index >= 0 &amp;&amp; index &lt; products.length) {
+      products.splice(index, 1);
+      saveProductsToLocalStorage();
+      renderProducts();
+    }
+  }
+  
+  /**
+   * Actualiza (modifica) un producto existente en el array.
+   * @param {number} index Índice del producto a modificar.
+   * @param {Object} updatedProduct Objeto con los datos actualizados.
+   */
+  function updateProduct(index, updatedProduct) {
+    if (index >= 0 &amp;&amp; index &lt; products.length) {
+      products[index] = updatedProduct;
+      saveProductsToLocalStorage();
+      renderProducts();
+    }
+  }
+  
+  /**
+   * Filtra los productos de acuerdo al término de búsqueda ingresado y actualiza la tabla.
+   */
+  function filterProducts() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const tbody = document.querySelector('#productsTable tbody');
+    tbody.innerHTML = '';
+  
+    // Filtrar productos cuyo nombre contenga el término buscado
+    const filteredProducts = products.filter(product =>
+      product.nombre.toLowerCase().includes(searchTerm)
+    );
+  
+    filteredProducts.forEach((product, filteredIndex) => {
+      const tr = document.createElement('tr');
+      const precioTotal = product.precio * product.cantidad;
+      tr.innerHTML = `
+        &lt;td>${product.nombre}&lt;/td>
+        &lt;td>${product.precio.toFixed(2)}&lt;/td>
+        &lt;td>${product.cantidad}&lt;/td>
+        &lt;td>${precioTotal.toFixed(2)}&lt;/td>
+        &lt;td>
+          &lt;button onclick="handleEditFilteredProduct(${filteredIndex}, '${searchTerm}')">Editar&lt;/button>
+          &lt;button onclick="deleteFilteredProduct(${filteredIndex}, '${searchTerm}')">Eliminar&lt;/button>
+        &lt;/td>
+      `;
+      tbody.appendChild(tr);
+    });
+  
+    // Actualizar total general
+    const generalTotal = filteredProducts.reduce((total, product) => {
+      return total + (product.precio * product.cantidad);
+    }, 0);
+    document.getElementById('generalTotal').textContent = generalTotal.toFixed(2);
+  }
+  
+  /**
+   * Función auxiliar para eliminar productos desde la vista filtrada.
+   * Busca el índice real del producto en el array original y lo elimina.
+   * @param {number} filteredIndex Índice en el array filtrado.
+   * @param {string} searchTerm Término de búsqueda usado para filtrar.
+   */
+  function deleteFilteredProduct(filteredIndex, searchTerm) {
+    const filteredProducts = products.filter(product =>
+      product.nombre.toLowerCase().includes(searchTerm)
+    );
+    const productToDelete = filteredProducts[filteredIndex];
+  
+    const realIndex = products.findIndex(product =>
+      product.nombre === productToDelete.nombre &amp;&amp;
+      product.precio === productToDelete.precio &amp;&amp;
+      product.cantidad === productToDelete.cantidad
+    );
+    if (realIndex !== -1) {
+      deleteProduct(realIndex);
+    }
+  }
+  
+  /**
+   * Maneja la edición de un producto desde la vista completa.
+   * Muestra un prompt para actualizar los valores del producto.
+   * @param {number} index Índice del producto a editar.
+   */
+  function handleEditProduct(index) {
+    const product = products[index];
+    const newName = prompt("Editar nombre:", product.nombre);
+    if (newName === null) return; // Cancelado
+    const newPrice = prompt("Editar precio:", product.precio);
+    if (newPrice === null) return;
+    const newQuantity = prompt("Editar cantidad:", product.cantidad);
+    if (newQuantity === null) return;
+  
+    const updatedProduct = {
+      nombre: newName.trim(),
+      precio: parseFloat(newPrice),
+      cantidad: parseInt(newQuantity)
+    };
+  
+    updateProduct(index, updatedProduct);
+  }
+  
+  /**
+   * Maneja la edición de un producto desde la vista filtrada.
+   * Busca el índice real en el array original y utiliza handleEditProduct.
+   * @param {number} filteredIndex Índice del producto en el array filtrado.
+   * @param {string} searchTerm Término de búsqueda usado para filtrar.
+   */
+  function handleEditFilteredProduct(filteredIndex, searchTerm) {
+    const filteredProducts = products.filter(product =>
+      product.nombre.toLowerCase().includes(searchTerm)
+    );
+    const productToEdit = filteredProducts[filteredIndex];
+  
+    const realIndex = products.findIndex(product =>
+      product.nombre === productToEdit.nombre &amp;&amp;
+      product.precio === productToEdit.precio &amp;&amp;
+      product.cantidad === productToEdit.cantidad
+    );
+    if (realIndex !== -1) {
+      handleEditProduct(realIndex);
+    }
+  }
+  
+  /**
+   * Ordena los productos alfabéticamente por su nombre.
+   */
+  function sortProducts() {
+    products.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    saveProductsToLocalStorage();
+    renderProducts();
+  }
+  
+  /**
+   * Ejecuta pruebas unitarias básicas para verificar el correcto funcionamiento
+   * de las operaciones con el array de productos: agregar, eliminar y filtrar.
+   */
+  function runTests() {
+    console.log("Iniciando pruebas unitarias...");
+  
+    // Prueba agregar producto
+    const initialLength = products.length;
+    const testProduct = { nombre: 'Test', precio: 2.50, cantidad: 5 };
+    addProduct(testProduct);
+    console.assert(products.length === initialLength + 1, 'Error en addProduct');
+    console.assert(products[products.length - 1].nombre === 'Test', 'Error en addProduct: nombre incorrecto');
+  
+    // Prueba eliminar producto
+    deleteProduct(products.length - 1);
+    console.assert(products.length === initialLength, 'Error en deleteProduct');
+  
+    // Prueba filtrar producto
+    const filtered = products.filter(p => p.nombre.toLowerCase().includes('manz'));
+    console.assert(filtered.length > 0, 'Error en filterProducts: debería encontrar al menos "Manzanas"');
+    
+    console.log("Pruebas unitarias completadas.");
+  }
+  
+  // Inicialización: renderizar productos y ejecutar pruebas unitarias
+  renderProducts();
+  runTests();
+  
+  /**
+   * =============================================================================
+   * Ejemplo de JSDoc para describir funciones y comportamientos
+   * =============================================================================
+   *
+   * Para documentar una función con JSDoc se sigue esta estructura:
+   *
+   * /**
+   *  * Breve descripción de lo que hace la función.
+   *  * @param {Tipo} nombreParametro Descripción del parámetro.
+   *  * @param {Tipo} otroParametro Descripción del parámetro.
+   *  * @returns {Tipo} Descripción del valor de retorno.
+   *  *\/
+   * function ejemplo(parametro, otroParametro) {
+   *   // implementación de la función
+   * }
+   *
+   * En el código anterior se ha aplicado JSDoc a las funciones para indicar los tipos
+   * y describir el comportamiento de cada una, facilitando la comprensión y mantenimiento
+   * del código.
+   */
+  </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addProduct">addProduct</a></li><li><a href="global.html#deleteFilteredProduct">deleteFilteredProduct</a></li><li><a href="global.html#deleteProduct">deleteProduct</a></li><li><a href="global.html#filterProducts">filterProducts</a></li><li><a href="global.html#handleAddProduct">handleAddProduct</a></li><li><a href="global.html#handleEditFilteredProduct">handleEditFilteredProduct</a></li><li><a href="global.html#handleEditProduct">handleEditProduct</a></li><li><a href="global.html#loadProductsFromLocalStorage">loadProductsFromLocalStorage</a></li><li><a href="global.html#products">products</a></li><li><a href="global.html#renderProducts">renderProducts</a></li><li><a href="global.html#runTests">runTests</a></li><li><a href="global.html#saveProductsToLocalStorage">saveProductsToLocalStorage</a></li><li><a href="global.html#sortProducts">sortProducts</a></li><li><a href="global.html#updateProduct">updateProduct</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Feb 05 2025 16:41:41 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

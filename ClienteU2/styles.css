@@ -1,0 +1,85 @@
+/* Fichero de estilos de la página llamado desde le HTML */
+body {
+    font-family: Arial, sans-serif; /* Fuente estándar */
+    line-height: 1.6; /* Altura de línea para mejor legibilidad */
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5; /* Fondo gris claro */
+    color: #333; /* Texto oscuro */
+}
+
+/* Encabezado principal */
+header {
+    text-align: center;
+    background-color: #007bff; /* Azul para el encabezado */
+    color: white; /* Texto blanco */
+    padding: 1rem 0;
+}
+
+/* Área principal donde se muestran las categorías */
+main {
+    max-width: 800px; /* Limitar el ancho del contenido */
+    margin: 2rem auto; /* Centrar en la página */
+    padding: 1rem;
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil, que parece no hacer nada, pero es un pequeño detalle */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilo de cada categoría */
+.category {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #ccc; /* Separación visual entre categorías */
+    padding-bottom: 1rem;
+    cursor: pointer; /* Icono de puntero para indicar interactividad */
+}
+
+/* Títulos de categorías */
+.category h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #007bff; /* Azul similar al del header */
+}
+
+/* Productos dentro de cada categoría */
+.products {
+    margin-top: 1rem;
+}
+
+/* Productos ocultos inicialmente */
+.products.hidden {
+    display: none;
+}
+
+/* Productos visibles después de la interacción */
+.products.visible {
+    display: block;
+}
+
+/* Estilo básico para los productos */
+.products p {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background-color: #f8f9fa; /* Fondo gris claro */
+    border-radius: 4px;
+}
+
+/* Estilo para productos destacados */
+.highlight {
+    font-weight: bold; /* Texto en negrita */
+    color: #d32f2f; /* Rojo para llamar la atención y que se sepa que hay que hacer click */
+    cursor: pointer; /* Indica interactividad */
+    position: relative;
+    transition: transform 0.3s ease; /* Animación notable, pero que no sea ruidosa */
+}
+
+/* Efecto al hacer hover sobre un producto destacado */
+.highlight:hover {
+    transform: translateY(-5px); /* Movimiento hacia arriba */
+}
+
+.highlight:hover::after {
+    content: " ⬆"; /* Utilizamos una flecha para llamar la atención */
+    font-size: 0.9em;
+    color: #d32f2f;
+}

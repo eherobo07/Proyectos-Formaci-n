@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Interactivo</title>
+    <!-- Enlace al archivo CSS para estilos -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <!-- Título principal de la página -->
+        <h1>Te damos la bienvenida a nuestro restaurante</h1>
+        <!-- Breve descripción sobre cómo interactuar con la página -->
+        <p>¡Interactua con el menú!</p>
+        <p>Haz clic en una categoría para ver los productos.</p>
+    </header>
+    <main>
+        <!-- Categoría de pizzas -->
+        <section class="category">
+            <h2>Pizzas</h2>
+            <!-- Lista de productos, inicialmente oculta -->
+            <div class="products hidden">
+                <p>Pizza Margarita</p>
+                <p>Pizza Cuatro Quesos</p>
+                <!-- Producto destacado con un asterisco para interacción -->
+                <p class="highlight">Pizza Pepperoni*</p>
+            </div>
+        </section>
+        <!-- Categoría de burgers -->
+        <section class="category">
+            <h2>Burgers</h2>
+            <div class="products hidden">
+                <p>Cheeseburger Clásica</p>
+                <p>Burger BBQ</p>
+                <!-- Producto destacado con un asterisco para interacción -->
+                <p class="highlight">Burger Vegetariana*</p>
+            </div>
+        </section>
+        <!-- Categoría de bebidas -->
+        <section class="category">
+            <h2>Bebidas</h2>
+            <div class="products hidden">
+                <p>Coca-Cola</p>
+                <!-- Producto destacado con un asterisco para interacción -->
+                <p class="highlight">Zumo natural*</p>
+                <p>Cerveza Artesanal</p>
+            </div>
+        </section>
+    </main>
+    <!-- Archivo JavaScript para interactividad -->
+    <script src="script.js"></script>
+</body>
+</html>

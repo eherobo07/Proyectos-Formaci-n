@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo de Productos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <aside class="sidebar left"></aside>
+
+    <div class="main-container">
+        <h1 class="title">Catálogo de Productos</h1>
+
+        <div class="navbar">
+            <div class="filter-header">
+                <h2>Filtrar por categoría</h2>
+            </div>
+            <div class="checkbox-group">
+                <div class="checkbox-column">
+                    <label><input type="checkbox" class="filter-category" value="Televisores" /> Televisores</label>
+                    <label><input type="checkbox" class="filter-category" value="Smartphones" /> Smartphones</label>
+                </div>
+                <div class="checkbox-column">
+                    <label><input type="checkbox" class="filter-category" value="Portátiles" /> Portátiles</label>
+                    <label><input type="checkbox" class="filter-category" value="Electrodomésticos" /> Electrodomésticos</label>
+                </div>
+                <div class="checkbox-column">
+                    <label><input type="checkbox" class="filter-category" value="pequeños electrodomésticos" /> Pequeños Electrodomésticos</label>
+                </div>
+            </div>
+            <button id="deselect-button" class="deselect-button">Deseleccionar</button>
+        </div>
+
+        <div id="productos-container"></div>
+    </div>
+
+    <aside class="sidebar right"></aside>
+
+    <script src="script.js"></script>
+</body>
+</html>

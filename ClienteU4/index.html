@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cliente U4 David Naranjo</title>
+  <!-- Vinculamos el archivo CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Gestión de productos de frutería</h1>
+  </header>
+
+  <section class="search-section">
+    <!-- Campo de búsqueda para filtrar productos -->
+    <input type="text" id="searchInput" placeholder="Buscar producto..." onkeyup="filterProducts()">
+    <!-- Botón para ordenar alfabéticamente -->
+    <button id="sortButton" onclick="sortProducts()">Ordenar</button>
+  </section>
+
+  <section class="table-section">
+    <!-- Tabla dinámica para mostrar productos -->
+    <table id="productsTable">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Precio Total</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Las filas se generarán dinámicamente -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Total general</td>
+          <td id="generalTotal"></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>    
+  </section>
+
+  <!-- Sección para agregar un nuevo producto -->
+  <section class="form-section">
+    <h2>Añadir producto</h2>
+    <form id="addProductForm" onsubmit="handleAddProduct(event)">
+      <input type="text" id="productName" placeholder="Nombre del producto" required>
+      <input type="number" id="productPrice" placeholder="Precio" required step="0.01">
+      <input type="number" id="productQuantity" placeholder="Cantidad" required>
+      <button type="submit">Añadir</button>
+    </form>
+  </section>
+
+  <!-- Vinculamos el archivo JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
